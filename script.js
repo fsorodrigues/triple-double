@@ -34,7 +34,11 @@ var tooltip1 = d3.tip() //setting the tool_tip <div> with d3-tip
                                                         + "<br> <b>P:</b> " + d.PTS
                                                         + " <b>R:</b> " + d.TRB
                                                         + " <b>A:</b> " + d.AST
-                                                        + "<br> <b>TDR:</b> " + d.TDR ;if (d.TDR === "N/A") {
+                                                        + " <b>S:</b> " + d.STL
+                                                        + " <b>B:</b> " + d.BLK
+                                                        + "<br> <b>TDR:</b> " + d.TDR ;
+
+                                    if (d.TDR === "N/A") {
                                       return tooltipNA;
                                     }
                                     else {
