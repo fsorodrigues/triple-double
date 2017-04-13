@@ -1,6 +1,7 @@
 // ------------------------
 // START
 // Script for interactive horizontal stacked bar chart
+// #chart_1
 
 var unit = 10;
 var h = unit;
@@ -10,7 +11,8 @@ var rectW = w + "px";
 var stacking = unit*1.1;
 
 var svg = d3.select(".chart_1")
-            .append("svg");
+            .append("svg")
+            .attr("class", "svg1");
 
 var  fillColor = function(d) {
                     if (d.TDR === "N/A") {
@@ -21,28 +23,24 @@ var  fillColor = function(d) {
                   };
                 };
 
+
+
 var tool_tip = d3.tip() //setting the tool_tip <div> with d3-tip
                  .attr("class", "d3-tip")
                  .offset([0, 20])
-                 .html(function(d) { var tooltipText = "<b>" + d.Date + "</b> vs. " + d.Opp + "</b>"
+                 .html(function(d) { var tooltipNA = "<b>Data</b> " + d.TDR;
+
+                                     var tooltipText = "<b>" + d.Date + "</b> vs. " + d.Opp + "</b>"
                                                         + "<br> <b>P:</b> " + d.PTS
                                                         + " <b>R:</b> " + d.TRB
                                                         + " <b>A:</b> " + d.AST
-                                                        + "<br> <b>TDR:</b> " + d.TDR ;
-
-                                    var tooltipNA = "<b>Data</b> " + d.TDR;
-
-                                    if (d.TDR === "N/A") {
-
+                                                        + "<br> <b>TDR:</b> " + d.TDR ;if (d.TDR === "N/A") {
                                       return tooltipNA;
-
                                     }
-
                                     else {
-
                                       return tooltipText;
-
-                                    } });
+                                    }
+                                  });
 
     svg.call(tool_tip); //calling tool_tip in svg context
 
@@ -129,6 +127,12 @@ d3.csv('triple_doubles_8384_to_1617_apr_10th_leaders_clean.csv', function(error,
 
 }); //closing csv function
 
+var source = svg.append("text")
+                 .attr("class", "source")
+                    .text("source: basketball-reference.com, NBA, Oscar Robertson archive")
+                    .attr("transform", function(d, i) {
+                                       return "translate(0,860)" });
+
 // END
 // ------------------------
 
@@ -136,13 +140,15 @@ d3.csv('triple_doubles_8384_to_1617_apr_10th_leaders_clean.csv', function(error,
 
 // ------------------------
 // START:
-// Script for Top10 triple-double game stat line table
+// Script for Top 10 triple-double by TDR
+// .table_1
 
 d3.csv('top10_triple_doubles_by_TDR_clean.csv', function (error,data) {
 
-  // var eastConf = d3.select('.table_1')
-  //                  .append('h1')
-  //                  .text("ABC");
+  var tableTitle = d3.select(".table_1")
+                     .append("text")
+                     .attr("class", "tableTitle")
+                     .text("Top 10 triple-double games all-time by TDR");
 
   function tabulate(data, columns) {
 		var table = d3.select('.table_1')
@@ -180,8 +186,12 @@ d3.csv('top10_triple_doubles_by_TDR_clean.csv', function (error,data) {
 	  return table;
 	}
 
-	tabulate(data, ["Player", "Pos", "Date", "Tm", "Opp", "W-L", "MP", "PTS", "FG%", "TRB", "AST", "STL", "BLK", "TOV", "TDR"]);
+	tabulate(data, ["RK", "Player", "Pos", "Date", "Tm", "Opp", "W-L", "MP", "PTS", "FG%", "TRB", "AST", "STL", "BLK", "TOV", "TDR"]);
 
+  var source = d3.select(".table_1")
+                 .append("text")
+                   .attr("class", "source")
+                      .text("source: basketball-reference.com, NBA, Oscar Robertson archive");
 
 });
 
@@ -192,13 +202,15 @@ d3.csv('top10_triple_doubles_by_TDR_clean.csv', function (error,data) {
 
 // ------------------------
 // START:
-// Script for total career triple-doubles table
+// Script for career TDR leaders table
+// .table_2
 
-d3.csv('top10_triple_doubles_by_TDR_clean.csv', function (error,data) {
+d3.csv('top10_triple_doubles_8384_to_1617_career_val_clean.csv', function (error,data) {
 
-  // var eastConf = d3.select('.content')
-  //                  .append('h1')
-  //                  .text("ABC");
+  var tableTitle = d3.select(".table_2")
+                     .append("text")
+                     .attr("class", "tableTitle")
+                     .text("Top 10 players by career TDR");
 
   function tabulate(data, columns) {
 		var table = d3.select('.table_2')
@@ -236,10 +248,137 @@ d3.csv('top10_triple_doubles_by_TDR_clean.csv', function (error,data) {
 	  return table;
 	}
 
-	tabulate(data, ["Player", "Pos", "Date", "Tm", "Opp", "W-L", "MP", "FG%", "3P%", "FT%", "TRB", "AST", "STL", "BLK", "TOV", "PTS", "TDR"]);
+	tabulate(data, ["RK", "Player", "Pos", "Total", "FG%", "3P%", "FT%", "PTSG", "TRBG", "ASTG", "STLG", "BLKG", "TOVG", "oTDR", "dTDR", "TDR"]);
 
+
+  var source = d3.select(".table_2")
+                 .append("text")
+                   .attr("class", "source")
+                      .text("source: basketball-reference.com, NBA, Oscar Robertson archive");
 
 });
 
 // END
 // ------------------------
+
+
+
+// ------------------------
+// START:
+// Script for Top 5 triple-double by oTDR
+// .table_3
+
+d3.csv('top5_triple_double_8384_to_1617_by_oTDR.csv', function (error,data) {
+
+  var tableTitle = d3.select(".table_3")
+                     .append("text")
+                     .attr("class", "tableTitle")
+                     .text("Top 5 triple-double games by oTDR");
+
+
+  function tabulate(data, columns) {
+		var table = d3.select('.table_3')
+                  .append('table');
+
+    var thead = table.append('thead');
+
+		var	tbody = table.append('tbody');
+
+		thead.append('tr')
+		     .selectAll('th')
+		     .data(columns)
+         .enter()
+		     .append('th')
+		     .text(function (column) { return column; })
+         .attr("id", function (column) { return column; });
+
+		var rows = tbody.selectAll('tr')
+		  .data(data)
+		  .enter()
+		  .append('tr');
+
+		var cells = rows.selectAll('td')
+		                .data(function (row) {
+
+        return columns.map(function (column) {
+		      return {column: column, value: row[column]};
+
+		    });
+		  })
+		  .enter()
+		  .append('td')
+		    .html(function (d) { return d.value; });
+
+	  return table;
+	}
+
+	tabulate(data, ["RK", "Player", "Pos", "Date", "Tm", "Opp", "FG%", "3P%", "FT%", "PTS", "TRB", "AST", "STL", "BLK", "TOV", "oTDR", "TDR"]);
+
+  var source = d3.select(".table_3")
+                 .append("text")
+                   .attr("class", "source")
+                      .text("source: basketball-reference.com, NBA, Oscar Robertson archive");
+
+});
+
+// END
+// ------------------------
+
+
+
+// ------------------------
+// START:
+// Script for Top 5 triple-double by oTDR
+// .table_4
+
+d3.csv('top5_triple_double_8384_to_1617_by_dTDR.csv', function (error,data) {
+
+  var tableTitle = d3.select(".table_4")
+                     .append("text")
+                     .attr("class", "tableTitle")
+                     .text("Top 5 triple-double games by dTDR");
+
+  function tabulate(data, columns) {
+		var table = d3.select('.table_4')
+                  .append('table');
+
+    var thead = table.append('thead');
+
+		var	tbody = table.append('tbody');
+
+		thead.append('tr')
+		     .selectAll('th')
+		     .data(columns)
+         .enter()
+		     .append('th')
+		     .text(function (column) { return column; })
+         .attr("id", function (column) { return column; });
+
+		var rows = tbody.selectAll('tr')
+		  .data(data)
+		  .enter()
+		  .append('tr');
+
+		var cells = rows.selectAll('td')
+		                .data(function (row) {
+
+        return columns.map(function (column) {
+		      return {column: column, value: row[column]};
+
+		    });
+		  })
+		  .enter()
+		  .append('td')
+		    .html(function (d) { return d.value; });
+
+	  return table;
+	}
+
+	tabulate(data, ["RK", "Player", "Pos", "Date", "Tm", "Opp", "FG%", "3P%", "FT%", "PTS", "TRB", "AST", "STL", "BLK", "TOV", "dTDR", "TDR"]);
+
+  var source = d3.select(".table_4")
+                 .append("text")
+                   .attr("class", "source")
+                      .text("source: basketball-reference.com, NBA, Oscar Robertson archive");
+
+});
