@@ -24,8 +24,8 @@ var tool_tip = d3.tip() //setting the tool_tip <div> with d3-tip
                                                         + " <b>R:</b> " + d.TRB
                                                         + " <b>A:</b> " + d.AST
                                                         + "<br> <b>TDR:</b> " + d.TDR
-                                                        + "<br> <b>MP:</b> " + d.MP
-                                                        + "<br> <b>Diff to AVG:</b> " + d.diff_tot_TDR ;
+                                                        + "<br> <b>Diff to AVG:</b> " + d.diff_tot_TDR
+                                                        + "<br> <b>MP:</b> " + d.MP;
 
                                      if (d.Player === "Average NBA Triple-Double") {
                                         return tooltipAVG;
