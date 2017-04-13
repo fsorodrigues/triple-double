@@ -19,7 +19,7 @@ var tooltip2 = d3.tip() //setting the tool_tip <div> with d3-tip
                                                       + "<br> <b>MP:</b> " + d.MP ;
 
                                      var tooltipText = "<b>" + d.Player + "</b>"
-                                                        + "<br> <b>" + d.Date + "</b> vs. " + d.Opp + "</b>"
+                                                        + "<br> <b>" + d.Date + "</b> vs. <b>" + d.Opp + "</b>"
                                                         + "<br> <b>P:</b> " + d.PTS
                                                         + " <b>R:</b> " + d.TRB
                                                         + " <b>A:</b> " + d.AST
@@ -83,11 +83,11 @@ d3.csv("westbrook_harden_1617_diff_clean.csv", function (data) {
                                               return "translate(15,80)" });
 
    var scaleX = d3.scaleLinear()
-                   .domain([20, 50]) //using 20 min and 60 min = 4QT + 1OT
+                   .domain([25, 50]) //using 20 min and 60 min = 4QT + 1OT
                    .range([10, 500]);
 
    var scaleY = d3.scaleLinear()
-                     .domain([d3.min(data, function(d) { return d.diff_tot_TDR; }), d3.max(data, function(d) { return d.diff_tot_TDR; })])
+                     .domain([d3.min(data, function(d) { return d.diff_tot_TDR; }), 70]) // d3.max(data, function(d) { return d.diff_tot_TDR; })
                      .range([500, 0]);
 
    var axisBottom = d3.axisBottom(scaleX).ticks(6)
@@ -113,7 +113,7 @@ d3.csv("westbrook_harden_1617_diff_clean.csv", function (data) {
    chartContainer.append("text")
     //  .attr("transform", "rotate(-90)")
      .attr("x", 0)
-     .attr("y", -7)
+     .attr("y", -15)
      .style("text-anchor", "left")
      .attr("class", "axisLabel")
      .text("Difference to Avg TDR");
