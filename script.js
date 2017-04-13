@@ -25,7 +25,7 @@ var  fillColor = function(d) {
 
 
 
-var tool_tip = d3.tip() //setting the tool_tip <div> with d3-tip
+var tooltip1 = d3.tip() //setting the tool_tip <div> with d3-tip
                  .attr("class", "d3-tip")
                  .offset([0, 20])
                  .html(function(d) { var tooltipNA = "<b>Data</b> " + d.TDR;
@@ -42,7 +42,7 @@ var tool_tip = d3.tip() //setting the tool_tip <div> with d3-tip
                                     }
                                   });
 
-    svg.call(tool_tip); //calling tool_tip in svg context
+    svg.call(tooltip1); //calling tool_tip in svg context
 
 d3.csv('triple_doubles_8384_to_1617_apr_10th_leaders_clean.csv', function(error, dataset) { //setting callback csv function
 
@@ -115,10 +115,10 @@ d3.csv('triple_doubles_8384_to_1617_apr_10th_leaders_clean.csv', function(error,
                        .attr("height", rectH)
                        .style("fill", fillColor)
                        //Hover animation
-                       .on('mouseover', function(d) { tool_tip.attr('class', 'd3-tip animate').show(d);
+                       .on('mouseover', function(d) { tooltip1.attr('class', 'd3-tip animate').show(d);
                                                       d3.select(this).transition().duration(200).style("fill", "#D0D3D4"); })
-                       .on('mouseout', function(d) { tool_tip.attr('class', 'd3-tip').show(d);
-                                                     tool_tip.hide();
+                       .on('mouseout', function(d) { tooltip1.attr('class', 'd3-tip').show(d);
+                                                     tooltip1.hide();
                                                      d3.select(this).transition().duration(0).style("fill", fillColor); });
 
  //Stacking rect, conditionals to stack in next line

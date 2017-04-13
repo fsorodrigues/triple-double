@@ -8,7 +8,7 @@ var svg2 = d3.select(".chart_2")
             .attr("class", "svg2");
 
 
-var tool_tip = d3.tip() //setting the tool_tip <div> with d3-tip
+var tooltip2 = d3.tip() //setting the tool_tip <div> with d3-tip
                  .attr("class", "d3-tip")
                  .offset([0, 20])
                  .html(function(d) { var tooltipAVG = "<b>" + d.Player + "</b>"
@@ -35,7 +35,7 @@ var tool_tip = d3.tip() //setting the tool_tip <div> with d3-tip
                                       }
                                     });
 
-    svg.call(tool_tip); //calling tool_tip in svg context
+    svg.call(tooltip2); //calling tool_tip in svg context
 
 
 d3.csv("westbrook_harden_1617_diff_clean.csv", function (data) {
@@ -144,10 +144,10 @@ d3.csv("westbrook_harden_1617_diff_clean.csv", function (data) {
                                .style("fill", fillColor)
                                .style("opacity", 0.6)
                                //Hover animation
-                               .on('mouseover', function(d) { tool_tip.attr('class', 'd3-tip animate').show(d);
+                               .on('mouseover', function(d) { tooltip2.attr('class', 'd3-tip animate').show(d);
                                                               d3.select(this).transition().duration(200).style("opacity", 1).style("stroke", "black").style("stroke-width", "0.5pt"); })
-                               .on('mouseout', function(d) { tool_tip.attr('class', 'd3-tip').show(d);
-                                                             tool_tip.hide();
+                               .on('mouseout', function(d) { tooltip2.attr('class', 'd3-tip').show(d);
+                                                             tooltip2.hide();
                                                              d3.select(this).transition().duration(0).style("opacity", 0.6).style("stroke", "none").style("stroke-width", "0pt"); });
 
 
