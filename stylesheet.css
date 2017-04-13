@@ -314,21 +314,24 @@ table {
 
 .table_1 {
   margin-left: 10%;
+  margin-top: 1.5em;
 }
 
 .table_2 {
   margin-left: 10%;
+  margin-top: 1.5em;
 }
 
 .table_3 {
   width: 80%;
   margin-left: 12%;
+  margin-top: 1.5em;
 }
 
 .table_4 {
   width: 80%;
   margin-left: 12%;
-
+  margin-top: 1.5em;
 }
 
 thead {
