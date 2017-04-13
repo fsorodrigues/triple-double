@@ -229,7 +229,6 @@ p {
 .page-title {
   margin-left: 15%;
   margin-right: 25%;
-  margin-bottom: 1.2em;
   line-height: 1.3em;
 }
 
@@ -264,6 +263,13 @@ h3 {
   font-size: 0.75em;
   font-weight: 400;
   line-height: 1.5em;
+  margin-left: 15%;
+  margin-right: 25%;
+  margin-bottom: 2.5em;
+}
+
+.bylines {
+  font-variant: small-caps;
 }
 
 h4 {
@@ -278,7 +284,7 @@ h4 {
 
 .link_header:link {
   text-decoration: none;
-  color: #8b675e;
+  color: #C13E3E;
   font-family: 'Raleway', Verdana, sans-serif;
 }
 

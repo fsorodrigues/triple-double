@@ -65,13 +65,13 @@ d3.csv("westbrook_harden_1617_diff_clean.csv", function (data) {
 
   var chartTitle = svg2.append("text")
                       .attr("class", "chartTitle")
-                      .text("Westbrook vs Harden, 2016-17 season")
+                      .text("Westbrook vs Harden, Race to the MVP")
                       .attr("transform", function(d, i) {
                                          return "translate(0,21)" });
 
   var chartSubtitle = svg2.append("text")
                      .attr("class", "chartSubtitle")
-                     .text("Includes all triple-doubles recorded by top 12 players. Game stats are only partly available")
+                     .text("Includes every triple-double recorded by Russell Westbrook and James Harden in 2016-17")
                      .attr("transform", function(d, i) {
                                         return "translate(0,42)" });
 
